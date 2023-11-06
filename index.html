@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  
+  let computer = function getComputerChoice(){
+    turn = ["rock", "paper" , "scissors"];
+    let value = Math.floor(Math.random()*3)
+    return (turn[value]);
+    
+  };
+
+  let player = function getPlayerChoice(){
+    input = prompt("Choose between Rock, Paper, Scissors");
+    return input.toLowerCase();
+  };
+
+  function game(com, play)
+  {
+    if (play === "rock")
+    {
+        if(com === "rock")
+        {
+          console.log("It's a tie");
+        };
+        if(com === "paper")
+        {
+          console.log("You Lose! Paper beats Rock");
+        };
+        if(com === "scissors")
+        {
+          console.log("You Win! Rock beats Scissors");
+        };
+    };
+    if (play === "paper")
+    {
+        if(com === "paper")
+        {
+          console.log("It's a tie");
+        };
+        if(com === "rock")
+        {
+          console.log("You Win! Paper beats Rock");
+        };
+        if(com === "scissors")
+        {
+          console.log("You Lose! Scissors beats Paper");
+        };
+    };
+    if (play === "scissors")
+    {
+        if(com === "scissors")
+        {
+          console.log("It's a tie");
+        };
+        if(com === "paper")
+        {
+          console.log("You Win! Scissors beats Paper");
+        };
+        if(com === "rock")
+        {
+          console.log("You Lose! Rock beats Scissors");
+        };
+    };
+
+  }
+  for (i=0; i<5 ; i++){
+  
+    game(computer(), player());
+  
+  }
+
+
+
+</script>
+
+<body>
+  
+</body>
+</html>
