@@ -1,2 +1,2 @@
 # rock-paper-scissors
-rock-paper-scrissor game with computer in console using java script only
+rock-paper-scrissor game with computer build with a simple UI using DOM methods
