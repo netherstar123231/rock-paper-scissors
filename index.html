@@ -7,78 +7,143 @@
 </head>
 <script>
   
-  let computer = function getComputerChoice(){
-    turn = ["rock", "paper" , "scissors"];
-    let value = Math.floor(Math.random()*3)
-    return (turn[value]);
+  
+  window.addEventListener("DOMContentLoaded", (event) => {
+        
+        let playerScore = 0;
+        let computerScore = 0;
+        let round = 1;
+        let button = document.querySelectorAll(".btn");
+        let text = document.querySelector(".text");
+        let restart = document.querySelector(".restart");
+        let roundText = document.querySelector(".round");
+        let body = document.querySelector("body");
+        let para = document.querySelector("p");
+
+        roundText.innerText = `Round: ${round}`
+        
+        text.innerText = `Player Score: ${playerScore} | Computer Score: ${computerScore}`
+
+        restart.addEventListener("click" , ()=>{
+            playerScore = 0;
+            computerScore = 0;
+            round = 1;
+            text.innerText = `Player Score: ${playerScore} | Computer Score: ${computerScore}`
+            roundText.innerText = `Round: ${round}`
+            body.style.cssText = "background-color:white;";
+            para.innerText = "Choose! first to Score 5 points Wins!";
+            button.forEach((btn)=> {
+                btn.removeAttribute('disabled');
+                })
+        })
+
+        
+
+        function computerChoice(){
+            let choices = ["Paper","Rock","Scissors"];
+            let number = Math.floor(Math.random()*3);
+            return choices[number];
+        }
+        
+        button.forEach((btn)=> {
+            btn.addEventListener("click",()=>{
+                round++;
+                let computer = computerChoice();
+                roundText.innerText = `Round: ${round}`
+                
+            
+                if(btn.value === computer){
+                    para.innerText = ("The round's a Tie")
+                }
+                else if((btn.value === "Rock" && computer === "Scissors") || (btn.value === "Paper" && computer === "Rock") || 
+                (btn.value === "Scissors" && computer === "Paper")){   
+                    playerScore ++;
+                    text.innerText = `Player Score: ${playerScore} | Computer Score: ${computerScore}`
+                    para.innerText = (`Player Scored! ${btn.value} beats ${computer}`)
+                }
+
+                else{
+                    computerScore ++;
+                    text.innerText = `Player Score: ${playerScore} | Computer Score: ${computerScore}`;
+                    para.innerText = (`Computer Scored! ${computer} beats ${btn.value}`);
+                }
+
+                
+                if (playerScore === 5  || computerScore === 5){
+                if(playerScore > computerScore)
+                    {
+                        
+                        body.style.cssText = "background-color:green;";
+                        roundText.innerText = `Congratulations! You Win`
+                        
+                    }
+                else if(playerScore < computerScore)
+                    {
+                        
+                        body.style.cssText = "background-color:red;";
+                        roundText.innerText = `Game Over! You lose`
+            
+                    }
+                else{
+            
+                        roundText.innerText = "The Game ended in a tie!";
+
+                    }
+                
+                    button.forEach((btn)=> {
+                        btn.setAttribute('disabled' , true);
+                    });
+
+                    }
+            });
+        });
+        
+    });
+
     
-  };
-
-  let player = function getPlayerChoice(){
-    input = prompt("Choose between Rock, Paper, Scissors");
-    return input.toLowerCase();
-  };
-
-  function game(com, play)
-  {
-    if (play === "rock")
-    {
-        if(com === "rock")
-        {
-          console.log("It's a tie");
-        };
-        if(com === "paper")
-        {
-          console.log("You Lose! Paper beats Rock");
-        };
-        if(com === "scissors")
-        {
-          console.log("You Win! Rock beats Scissors");
-        };
-    };
-    if (play === "paper")
-    {
-        if(com === "paper")
-        {
-          console.log("It's a tie");
-        };
-        if(com === "rock")
-        {
-          console.log("You Win! Paper beats Rock");
-        };
-        if(com === "scissors")
-        {
-          console.log("You Lose! Scissors beats Paper");
-        };
-    };
-    if (play === "scissors")
-    {
-        if(com === "scissors")
-        {
-          console.log("It's a tie");
-        };
-        if(com === "paper")
-        {
-          console.log("You Win! Scissors beats Paper");
-        };
-        if(com === "rock")
-        {
-          console.log("You Lose! Rock beats Scissors");
-        };
-    };
-
-  }
-  for (i=0; i<5 ; i++){
-  
-    game(computer(), player());
-  
-  }
-
-
-
 </script>
-
-<body>
+<style>
+    
+    body{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 1000px;
+    }
+    .main{
+      display: flex;
+      flex-direction: column;
+      height: 500px;
+      justify-content: start;
+      
+    }
+    .container,h1,p,.round{
+      display: flex;
+      justify-content: center;
+    }
+    
+    .container{
+        gap:20px;
+    }
+    .text{
+      display: flex;
+      align-self: center;
+      margin-top: 20px;
+    }
   
+</style>
+<body>
+    <div class="main">
+      <h1>Rock , Paper , Scissors</h1>
+      <p>Choose! first to Score 5 points Wins!</p>
+      <div class="container">
+        <button class="btn" value="Rock">Rock</button>
+        <button class="btn" value="Paper">Paper</button>
+        <button class="btn" value="Scissors">Scissors</button>
+        <button class="restart">Restart</button>
+      </div>
+      <div class="text"></div>
+      <h2 class ="round"></h2>
+    </div>
 </body>
 </html>
